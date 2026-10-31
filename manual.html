@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Wealth Seasons — Player's Manual</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/manual.css">
+</head>
+<body class="manual-body">
+  <header class="manual-header">
+    <div class="manual-header-inner">
+      <div>
+        <h1>Wealth Seasons</h1>
+        <div class="tagline">Player's manual — a lifetime investment game built from a pattern language of 100+ years of evidence</div>
+      </div>
+      <a class="back-to-game" href="index.html">◀ Back to game</a>
+    </div>
+  </header>
+
+  <div class="manual-layout">
+    <!-- Table of contents -->
+    <aside class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#what">What this game is</a></li>
+        <li><a href="#start">How to start a session</a></li>
+        <li><a href="#cycle">The annual cycle</a></li>
+        <li><a href="#accounts">Accounts &amp; what they do</a></li>
+        <li><a href="#patterns">The pattern language</a></li>
+        <li><a href="#couplings">How patterns couple</a></li>
+        <li><a href="#decisions">What decisions you make</a></li>
+        <li><a href="#score">The Stewardship Score</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#ghost">The Ghost Autopilot</a></li>
+        <li><a href="#metrics">Metrics on screen</a></li>
+        <li><a href="#tax">Tax system in detail</a></li>
+        <li><a href="#primer">Quick strategy primer</a></li>
+        <li><a href="#personas">Sample lifetimes to try</a></li>
+        <li><a href="#limits">Limitations</a></li>
+        <li><a href="#files">Files in this project</a></li>
+      </ol>
+    </aside>
+
+    <main class="manual-content">
+      <blockquote class="big-quote">
+        A lifetime investment <strong>game</strong>, built from a pattern language of 100+ years of investing evidence.
+        Not advice. Not a forecast. A teaching instrument with score, achievements, and scenarios.
+      </blockquote>
+
+      <section class="callout cta">
+        <h2>What makes it a game (not just a calculator)</h2>
+        <ul class="bullets">
+          <li><strong>A single number to chase</strong> — the <em>Stewardship Score</em>, live in the status bar. Composed of pattern adherence + achievements + survival + inflation-adjusted final wealth.</li>
+          <li><strong>Two ghosts live your life beside you</strong> — from year one, two companion sims advance through the identical world (same markets, same life events, same lifespan): one on published mainstream-average behavior, one on the pattern language. Their lines are on your chart the whole game.</li>
+          <li><strong>7 scenarios</strong> with explicit goals — Survive 1929, Joseph's Test, House Hacker, Late Starter, Family of Four, FIRE by 50, Fresh Start.</li>
+          <li><strong>25+ achievements</strong> pop as toasts mid-game; "big" milestones pause with a modal.</li>
+          <li><strong>Uncertainty</strong> — random historical-start drops you into 1928-1965 and you live through actual market history without knowing the year.</li>
+          <li><strong>Tension</strong> — selling into a -25% year is a -3 pattern hit; holding through it is +2. Joseph reserves only matter if you also enable Cycle Rhythm.</li>
+          <li><strong>Replayability</strong> — same seed reproduces a life. Try different strategies against identical markets.</li>
+        </ul>
+      </section>
+
+      <section id="what">
+        <h2>1. What this game is</h2>
+        <p>You play a single human life: you start somewhere between age 22 and 70, you receive wages each year, you make a small number of decisions, and a real or stochastic market unfolds around you. The engine runs year by year. Each year applies returns, fires life events, computes taxes to the dollar, and scores how closely your behavior matches a set of <strong>patterns</strong> observed in high-performing investors going back to 1928.</p>
+        <p>Two things matter:</p>
+        <ol>
+          <li><strong>Outcome</strong> — your inflation-adjusted net worth, whether you ran out of money, what you transferred to heirs.</li>
+          <li><strong>Pattern adherence</strong> — how often you behaved like the disciplined operators the engine is calibrated against.</li>
+        </ol>
+        <p>The game ends when you die (probabilistic SSA-style mortality past 80, certain at 105). You then receive an <strong>archetype</strong> label and a decade-by-decade summary.</p>
+      </section>
+
+      <section id="start">
+        <h2>2. How to start a session</h2>
+        <ol>
+          <li>Double-click <code>index.html</code>.</li>
+          <li><strong>Pick a scenario</strong> at the top of the setup screen. Each scenario has clear goals shown below the dropdown:
+            <div class="scenario-cards">
+              <div class="scenario-card"><strong>Fresh start (open-ended)</strong><p>Recent grad, no constraints. Default.</p></div>
+              <div class="scenario-card"><strong>Survive 1929</strong><p>Start age 22 in 1929. Hold through 80%+ drawdown to retirement.</p></div>
+              <div class="scenario-card"><strong>Joseph's Test</strong><p>Stochastic mode. Maintain ≥1 yr reserve and execute Cycle Rhythm.</p></div>
+              <div class="scenario-card"><strong>House Hacker</strong><p>Execute Serial Residence Harvester (§121) 3+ times by 60.</p></div>
+              <div class="scenario-card"><strong>Late Starter</strong><p>Age 45 with $50k saved. Reach $1M nominal by 65.</p></div>
+              <div class="scenario-card"><strong>Alabama Family</strong><p>MFJ, $130k income, two-kid spending. Leave a $2M legacy.</p></div>
+              <div class="scenario-card"><strong>FIRE</strong><p>Retire at 50 with $3M real, sustain through 90.</p></div>
+            </div>
+          </li>
+          <li>Customize specific fields if you want. Toggle <kbd>Hints: on</kbd> to see captions explaining every input.</li>
+        </ol>
+      </section>
+
+      <section id="cycle">
+        <h2>3. The annual cycle</h2>
+        <p>In order, every year:</p>
+        <ol class="phased">
+          <li><strong>Allocation changes execute as trades</strong> at the start of the year. New weights apply to every account immediately; in the taxable account, reducing risk sleeves sells appreciated shares and realizes LTCG taxed this year.</li>
+          <li><strong>Wages received</strong> (taxed on the same figure). Growth (real + inflation) applies at year-end.</li>
+          <li><strong>Spending and home costs</strong> deducted from Cash/Emergency. Homes carry mortgage P&amp;I, ~1% maintenance, ~0.8% property tax.</li>
+          <li><strong>Investment property</strong> rents (LTR or STR), operating expenses, mortgage interest, and 27.5-yr depreciation are computed; actual cash flow lands in your cash account. Values appreciate via FHFA housing index.</li>
+          <li><strong>Farmland</strong> cash rent (~3%, credited to cash) + appreciation (USDA NASS).</li>
+          <li><strong>Business</strong> cash flow (credited to cash) grows or shocks (4%/yr major-loss risk; otherwise N(10%, 30%)).</li>
+          <li><strong>Liquid accounts grow sleeve by sleeve — and weights drift</strong>: a portfolio left alone becomes what its winners make it. Annual rebalancing is what resets it to your policy.</li>
+          <li><strong>RMD</strong> taken if at/past start age (73 if born 1951-59, 75 if born 1960+).</li>
+          <li><strong>Social Security</strong> paid with COLA if claimed. Auto-claims at 70. Benefit computed from your actual career earnings (top 35 years, CPI-indexed bend points).</li>
+          <li><strong>Withdrawals</strong> follow tax-efficient order: cash → taxable (gains from actual tracked basis) → traditional → Roth.</li>
+          <li><strong>Taxes computed to the dollar</strong>: federal brackets, capital gains stacked, NIIT, Alabama state, IRMAA at 65+, FICA on wages. Overdrawn cash triggers forced liquidation of investments (taxed next year).</li>
+          <li><strong>Roth conversion</strong> if requested — taxed as ordinary income now.</li>
+          <li><strong>Annual rebalance</strong> if enabled — resets drifted weights to policy.</li>
+          <li><strong>Joseph reserve</strong>: in good years a slice of cash is diverted to the reserve.</li>
+          <li><strong>Cycle Rhythm</strong>: if enabled and last year was -15%+, half the reserve auto-deploys to equities.</li>
+          <li><strong>Lifestyle absorption</strong>: unassigned cash above your cash target partially drifts into consumption during working years (see the money model below). Logged every year.</li>
+          <li><strong>Patterns scored</strong>.</li>
+          <li><strong>Life events</strong> roll: promotion, layoff, marriage, child, health, inheritance, vacancy, business shock. Your ghosts receive the same events.</li>
+          <li><strong>Mortality roll</strong>.</li>
+        </ol>
+        <h3>The money model: assigned vs unassigned dollars</h3>
+        <p><strong>Money you deliberately assign is money you keep. Unassigned money drifts away.</strong> Every dollar of income lands in Cash/Emergency. Dollars you direct — contributions, taxable investing, reserves, a down-payment fund (raise your <em>cash target</em>), giving, purchases — go where you sent them. Cash above the cash target has no assignment, and roughly half the excess is absorbed into lifestyle each working year. The final report totals it, per decade, next to your taxes.</p>
+        <p>This is the published record of average behavior, not a punishment: the U.S. personal saving rate runs ~4-5% of disposable income (BEA, 2024-25), while 401(k) participants who automate defer 7.7% on average (Vanguard <em>How America Saves 2025</em>) — and keep it, because it never touches checking. Wage growth defaults to 1% real above inflation (long-run SSA Average Wage Index); promotions arrive as life events on top. All "Real" figures deflate by the simulation's actual cumulative CPI.</p>
+      </section>
+
+      <section id="accounts">
+        <h2>4. Accounts and what they do</h2>
+        <div class="table-wrap">
+          <table class="accounts">
+            <thead>
+              <tr><th>Account</th><th>Pre-tax in?</th><th>Tax-free growth?</th><th>Tax on withdrawal</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr class="r-roth"><td>Roth 401(k) / Roth IRA</td><td>No (post-tax)</td><td>Yes</td><td>None after 59½</td><td>Best when current ≤ future bracket. No Roth IRA RMDs.</td></tr>
+              <tr class="r-trad"><td>Trad 401(k) / Trad IRA</td><td>Yes</td><td>Deferred</td><td>Ordinary income</td><td>RMDs at 73 or 75.</td></tr>
+              <tr class="r-hsa"><td>HSA</td><td>Yes</td><td>Yes (medical)</td><td>Ordinary if non-medical</td><td>Triple-tax-advantaged.</td></tr>
+              <tr class="r-taxable"><td>Taxable brokerage</td><td>No</td><td>Annual drag</td><td>LTCG 0/15/20% + NIIT</td><td>Step-up at death = best legacy bucket.</td></tr>
+              <tr class="r-cash"><td>Cash / Emergency</td><td>—</td><td>—</td><td>None</td><td>Buffer. Grows at T-bill.</td></tr>
+              <tr class="r-reserve"><td>Joseph Reserve</td><td>—</td><td>—</td><td>None on growth</td><td>Counter-cyclical store.</td></tr>
+              <tr class="r-rental"><td>Investment property</td><td>—</td><td>Depreciation shelters</td><td>Recapture + LTCG; 1031 defers</td><td>Cash flow + leverage allowed.</td></tr>
+              <tr class="r-home"><td>Primary residence</td><td>—</td><td>Imputed rent</td><td><strong>§121: $250k single / $500k MFJ tax-free every 2 yrs</strong></td><td>Improvements raise basis.</td></tr>
+              <tr class="r-secondary"><td>Secondary home</td><td>—</td><td>—</td><td>LTCG (no §121)</td><td>Lifestyle drag unless STR.</td></tr>
+              <tr class="r-metals"><td>Precious metals</td><td>—</td><td>—</td><td><strong>Collectibles 28%</strong></td><td>AL exempts bullion sales tax.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="patterns">
+        <h2>5. The pattern language</h2>
+        <p>Each pattern declares what it watches, the problem it solves, what it asks of you, and how the engine scores it each year. Patterns are <em>coupled</em> — activating one usually reinforces or constrains others.</p>
+
+        <h3>Layer 0 — Human Capital</h3>
+        <div class="pattern-card layer-foundational">
+          <strong>Human Capital Maximizer</strong>
+          <p>Scores when your real wage growth beats inflation by 2-4%. Your future earnings are your largest asset early — skill, network, disability insurance.</p>
+        </div>
+
+        <h3>Layer 1 — Foundational (always active)</h3>
+        <div class="pattern-grid">
+          <div class="pattern-card layer-foundational"><strong>Compound Early and Often</strong><p>+2/year for ≥15% savings rate under 35. Time, not return, dominates early.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Own the Market Broadly</strong><p>+1 when core sleeve ≥50% equity at low fee. Low-turnover indexing.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Diversify Across Seasons</strong><p>+1 for ≥3 sleeves; +1 for real assets; -1 for &gt;95% equities past 55.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Avoid Permanent Loss</strong><p>+1 for ≥3 months cash; -1 for &lt;1 month; -2 for panic-selling in a -15% year.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Stay the Course</strong><p>+2 for holding through a -15% year; -3 for cutting equities &gt;5% in a -30% year.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Continuous Rebalancing</strong><p>+1 when rebalanceAnnually is on.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Circle of Competence</strong><p>-1/yr per asset class owned outside your competence.</p></div>
+          <div class="pattern-card layer-foundational"><strong>Behavioral Fortress</strong><p>+1 for stable written policy; -1 for &gt;25% allocation churn.</p></div>
+          <div class="pattern-card layer-foundational meta"><strong>Biblical Stewardship (meta)</strong><p>Composite: diligence + prudence + diversification + generosity. Up to +2/year.</p></div>
+        </div>
+
+        <h3>Layer 2 — Asset &amp; Risk Engines</h3>
+        <div class="pattern-grid">
+          <div class="pattern-card layer-asset"><strong>Real Asset Income Engine</strong><p>+1/year for any rental, farm, or primary home.</p></div>
+          <div class="pattern-card layer-asset"><strong>Residence as Dual-Use Capital</strong><p>+1 for moderate LTV; -1 if primary &gt;60% NW past 40.</p></div>
+          <div class="pattern-card layer-asset"><strong>Serial §121 Harvester</strong><p>+2 in the year you take a §121 exclusion; -1 if ≥4 cycles pre-55.</p></div>
+          <div class="pattern-card layer-asset"><strong>Judicious Leverage</strong><p>+1 for LTV &lt;0.75; -1 for &gt;0.85.</p></div>
+          <div class="pattern-card layer-asset"><strong>Cycle-Aware Allocation</strong><p>Tilts within Diversify.</p></div>
+          <div class="pattern-card layer-asset"><strong>Time in the Market</strong><p>Implicit — panic-sells lose; sustained holds compound.</p></div>
+          <div class="pattern-card layer-asset"><strong>Inflation Protection Engine</strong><p>+2 in &gt;5% inflation year with ≥20% real assets/metals.</p></div>
+          <div class="pattern-card layer-asset"><strong>Precious Metals Fortress</strong><p>+1 for 5-15% metals; -1 for &gt;30%.</p></div>
+          <div class="pattern-card layer-asset"><strong>Joseph's Cycle-Reserve</strong><p>+1 for ≥1 year of spending in reserve; +1 in &gt;15% years with Joseph rate ≥10%.</p></div>
+          <div class="pattern-card layer-asset"><strong>Cycle Rhythm Navigator</strong><p>+2 in any year you deployed reserves into a &gt;10% correction.</p></div>
+          <div class="pattern-card layer-asset"><strong>Nehemiah's Rebuild</strong><p>+1 for sustained 3+ year project (business or §121 home).</p></div>
+        </div>
+
+        <h3>Layer 3 — Tax &amp; Account Optimization</h3>
+        <div class="pattern-grid">
+          <div class="pattern-card layer-tax"><strong>Tax-Advantaged Maximizer</strong><p>+2 when sheltered contributions ≥2× taxable and &gt;$5k.</p></div>
+          <div class="pattern-card layer-tax"><strong>Tax Shelter Allocation</strong><p>Directs where every other pattern's assets live.</p></div>
+          <div class="pattern-card layer-tax"><strong>Pre-Tax Account Bridge</strong><p>+2 in gap years (retired, 60+, pre-RMD) when converting &gt;$5k.</p></div>
+          <div class="pattern-card layer-tax"><strong>Charitable Multiplier</strong><p>+1 for &gt;5% wage giving; +2 for QCD &gt;$5k post-70.</p></div>
+        </div>
+
+        <h3>Layer 4 — Retirement Distribution</h3>
+        <div class="pattern-grid">
+          <div class="pattern-card layer-retirement"><strong>Sequence-of-Returns Shield</strong><p>+1 for 2-6 years of cash; -1 for &lt;1.</p></div>
+          <div class="pattern-card layer-retirement"><strong>SS Longevity Optimizer</strong><p>+2 for 70+; +1 for FRA+; -1 for 62.</p></div>
+          <div class="pattern-card layer-retirement"><strong>Retirement Spending Curve</strong><p>+1 for smile/declining (empirical "go-go / slow-go / no-go").</p></div>
+        </div>
+
+        <h3>Layer 5 — Legacy</h3>
+        <div class="pattern-grid">
+          <div class="pattern-card layer-legacy"><strong>Legacy &amp; Step-Up Basis</strong><p>+1 past 70 for holding &gt;$250k taxable gains untouched.</p></div>
+        </div>
+      </section>
+
+      <section id="couplings">
+        <h2>6. How patterns couple (the generative rules)</h2>
+        <p>Examples the engine encodes:</p>
+        <ul class="bullets coupling-list">
+          <li><strong>Compound Early + Tax Shelter</strong> → Roth-heavy contributions early amplify both.</li>
+          <li><strong>Real Asset + Judicious Leverage + Avoid Permanent Loss</strong> → buying a property boosts the first two and tightens the third (more cash reserves needed).</li>
+          <li><strong>§121 Harvester + Behavioral Fortress</strong> → tax-free flips are a win but lifestyle-creep risk — engine penalizes &gt;4 cycles pre-55.</li>
+          <li><strong>Pre-Tax Bridge + SS Optimizer</strong> → converting in gap years lowers future RMDs and SS taxation in your 70s.</li>
+          <li><strong>Joseph Reserve + Cycle Rhythm</strong> → storing in bulls <em>enables</em> deploying in bears. Either alone is incomplete.</li>
+          <li><strong>Curved Spending + Sequence Shield</strong> → front-loaded spending raises sequence risk; buckets exist to absorb it.</li>
+          <li><strong>Inflation Protection + Real Asset + Metals</strong> → three angles on the same defense. Engine wants at least one active &gt;5% inflation.</li>
+          <li><strong>Biblical Stewardship (meta)</strong> → sits over all four legs (diligence, prudence, diversification, generosity).</li>
+        </ul>
+      </section>
+
+      <section id="decisions">
+        <h2>7. What decisions you make each year</h2>
+        <h3>Working years</h3>
+        <ul class="bullets">
+          <li><strong>Contributions</strong> to Roth 401(k), Trad 401(k), Roth IRA, Trad IRA, HSA, Taxable. 2026 limits: 401(k) $23,500 ($31k catch-up at 50+); IRA $7,500 ($8,500 catch-up); HSA $4,300.</li>
+          <li><strong>Allocation</strong> — stocks / bonds / cash / REIT / metals. Must sum to 100%.</li>
+          <li><strong>Major moves</strong>: Buy primary home, Buy vacation home, Buy rental ($150k), Buy STR ($250k), Buy farmland ($80k cash), Start business ($50k). Once you own a primary, the button changes to <strong>Remodel</strong> and after 2 years, <strong>Sell primary (§121)</strong> appears.</li>
+          <li><strong>Stewardship &amp; strategy</strong>: Joseph reserve rate (0–25%), charitable giving this year, Cycle Rhythm toggle.</li>
+        </ul>
+        <h3>Retirement</h3>
+        <ul class="bullets">
+          <li>Same allocation controls.</li>
+          <li><strong>Spending curve</strong>: Flat / Smile / Declining.</li>
+          <li><strong>Roth conversion</strong> this year ($) — best in gap years.</li>
+          <li><strong>Claim SS</strong> if not yet claimed; auto-claims at 70.</li>
+          <li><strong>QCD</strong> input once you reach age 70.</li>
+        </ul>
+      </section>
+
+      <section id="score">
+        <h2>8. The Stewardship Score</h2>
+        <p>A single composite number, visible at all times in the status bar. Roughly 0–1000 over a full life.</p>
+        <pre><code>Stewardship Score = pattern_net
+                  + 15 × achievements
+                  + survival_bonus   (+100 if positive NW at death)
+                  + wealth_bonus     (up to +200 at $10M real)
+                  − shortfall_penalty (−150 if ever ran out)</code></pre>
+        <p>Not a substitute for any individual metric — it's a deliberately blunt single-number summary so runs can be compared.</p>
+      </section>
+
+      <section id="achievements">
+        <h2>9. Achievements</h2>
+        <p>25+ unlockable badges. They fire as toasts when triggered; "big" wealth crossings trigger a pause-the-game modal. Visible in the final report as 🏆 (unlocked) or 🔒 (locked).</p>
+        <div class="ach-categories">
+          <div class="ach-cat">
+            <h4>Wealth milestones</h4>
+            <ul><li>First $100k</li><li>Millionaire</li><li>Decamillionaire</li><li>Nine-Figure Net Worth</li></ul>
+          </div>
+          <div class="ach-cat">
+            <h4>Behavioral</h4>
+            <ul><li>Bought the Dip</li><li>Held Through the Storm</li><li>First Roth Contribution</li><li>Maxed the 401(k)</li></ul>
+          </div>
+          <div class="ach-cat">
+            <h4>Real assets</h4>
+            <ul><li>First Rental</li><li>First Home</li><li>§121 Tax-Free Sale</li><li>Serial Harvester (3 sales)</li><li>Three-Year Business</li></ul>
+          </div>
+          <div class="ach-cat">
+            <h4>Tax / retirement</h4>
+            <ul><li>Roth Conversion Ladder</li><li>Delayed SS to 70</li><li>First QCD</li></ul>
+          </div>
+          <div class="ach-cat">
+            <h4>Stewardship</h4>
+            <ul><li>Filled the Granary</li><li>Generous Decade</li><li>Pattern Net +500</li></ul>
+          </div>
+          <div class="ach-cat">
+            <h4>Crashes survived</h4>
+            <ul><li>Survived a Bear</li><li>Survived 2008</li><li>Survived the Crash of 1929</li></ul>
+          </div>
+          <div class="ach-cat">
+            <h4>Life completion</h4>
+            <ul><li>Retired by 65</li><li>Retired by 55 (FIRE)</li><li>Lasted to 90 with money</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="ghost">
+        <h2>10. The three ghosts (live comparison)</h2>
+        <p>Two companion lives are created the moment yours begins and advance every time you do — through the <strong>identical world</strong>: the same recorded market returns, the same promotions, layoffs, marriage, children, health costs and inheritances (replayed with the same magnitudes), and exactly your lifespan.</p>
+        <ul>
+          <li><strong>Mainstream Autopilot</strong> — verified published averages: 7.7% deferral (Vanguard <em>How America Saves 2025</em>), Vanguard target-date glide path, Social Security at FRA (67). No conversions, no reserves, no real assets.</li>
+          <li><strong>Pattern-Disciplined</strong> — the full pattern-language autopilot: 15% savings, Roth-first early, gap-year conversions, SS at 70.</li>
+          <li><strong>You</strong> — whatever you actually did.</li>
+        </ul>
+        <p>Both ghosts retire at 65 so retirement timing is never the confound. The final report shows each life's ending wealth, real wealth, lifetime taxes, and lifetime lifestyle absorption — the gap between Mainstream and Disciplined in the same life is the number the game exists to surface.</p>
+        <p>This is the central game-vs-simulation distinction: you're not playing against an abstract "good investor", you're playing against the disciplined pattern-default with full knowledge of <em>your</em> market and <em>your</em> life events.</p>
+      </section>
+
+      <section id="metrics">
+        <h2>11. The metrics you'll see</h2>
+        <dl class="metrics-list">
+          <dt>Status bar (top)</dt><dd>Age, year, total net worth, real (today $) NW, current wages or "retired", spending target, life-stage label, Stewardship Score, Achievements count.</dd>
+          <dt>Wealth trajectory chart</dt><dd>Line of net worth, with red dots marking years where the S&amp;P 500 fell more than 15%.</dd>
+          <dt>Accounts panel</dt><dd>Every account balance + real assets (primary, secondary, properties, farmland, business, Joseph reserve, lifetime giving).</dd>
+          <dt>Pattern guidance</dt><dd>One-line situational advice per active pattern + running pattern score. Collapsible.</dd>
+          <dt>Messages stream</dt><dd>Market events, life events, property purchases, §121 sales, reserve deployments, big tax events.</dd>
+          <dt>Final report</dt><dd>Peak NW, cumulative taxes, lifetime lifestyle absorption, max drawdown, pattern score, archetype, achievement grid, three-lives comparison with per-life ledgers, decade-by-decade table.</dd>
+        </dl>
+        <h3>Archetypes you can be assigned</h3>
+        <div class="archetypes">
+          <div class="archetype"><strong>Boglehead Indexer</strong><p>Broad equity ownership, no real-asset bets.</p></div>
+          <div class="archetype"><strong>Real-Asset Operator</strong><p>2+ properties/farm with conservative leverage.</p></div>
+          <div class="archetype"><strong>Owner-Operator</strong><p>Concentrated equity in your own business.</p></div>
+          <div class="archetype"><strong>Pattern-Disciplined Compounder</strong><p>High net pattern score, balanced.</p></div>
+          <div class="archetype"><strong>Behavioral Investor</strong><p>Net negative pattern score; emotion-driven.</p></div>
+          <div class="archetype"><strong>Balanced Diversifier</strong><p>Composite of paper + real assets, resilient.</p></div>
+        </div>
+      </section>
+
+      <section id="tax">
+        <h2>12. The tax system in detail</h2>
+        <p>The engine computes federal + Alabama tax to the dollar each year using 2026 brackets.</p>
+        <ul class="bullets dense">
+          <li><strong>Ordinary brackets</strong>: 10 / 12 / 22 / 24 / 32 / 35 / 37%.</li>
+          <li><strong>Standard deduction</strong>: $15,800 single, $31,600 MFJ; +$2,050 / $1,650 senior bonus at 65+.</li>
+          <li><strong>LTCG &amp; qualified dividends</strong>: 0 / 15 / 20%. 0% bracket ends at $49,000 single / $98,000 MFJ.</li>
+          <li><strong>Collectibles</strong> (physical metals): 28% LTCG.</li>
+          <li><strong>NIIT</strong>: 3.8% on net investment income above $200k single / $250k MFJ MAGI.</li>
+          <li><strong>SS taxation</strong>: provisional income above $25k/$32k → 50% taxable; above $34k/$44k → 85%.</li>
+          <li><strong>IRMAA</strong>: Medicare surcharges past $106k/$212k MAGI at 65+.</li>
+          <li><strong>FICA</strong>: 7.65% on wages up to $176,100, +Medicare add-ons above $200k/$250k.</li>
+          <li><strong>Section 121</strong>: $250k single / $500k MFJ excluded on primary home gain, every 2 years.</li>
+          <li><strong>QCD</strong>: up to $108k/yr from IRA to charity, ages 70.5+, satisfies RMD without income tax.</li>
+          <li><strong>Alabama</strong>: 2 / 4 / 5% brackets, $3k / $8.5k standard deduction, exempts SS &amp; most retirement income, exempts bullion sales.</li>
+          <li><strong>Above-the-line</strong>: Trad 401(k), Trad IRA, HSA.</li>
+          <li><strong>Itemized vs standard</strong>: engine takes the larger of (charitable + mortgage int. cap + SALT $10k) vs std.</li>
+        </ul>
+      </section>
+
+      <section id="primer">
+        <h2>13. Quick strategy primer</h2>
+        <div class="stage">
+          <h3>Early career (22-35)</h3>
+          <ul>
+            <li>Push Roth 401(k) + Roth IRA + HSA to limit. Low bracket — pay now, grow forever tax-free.</li>
+            <li>Allocation 80-90% stocks. Maybe 5% metals as insurance.</li>
+            <li>Buy a primary home only if you'll live there 3+ years.</li>
+            <li>Build Circle of Competence in <em>one</em> extra area before owning that asset class.</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <h3>Mid-career (35-55)</h3>
+          <ul>
+            <li>Mix Trad and Roth as bracket climbs into 22-24%.</li>
+            <li>Add one rental, farmland, or business at edge of competence.</li>
+            <li>Glide equity allocation down ~1%/yr. By 55 ≈ 70 / 20 / 5 / 5.</li>
+            <li>Turn on Joseph reserve 10-15%. Turn on Cycle Rhythm.</li>
+            <li>Consider §121 cycle every 3-4 years.</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <h3>Pre-retirement (55-65)</h3>
+          <ul>
+            <li>Cash bucket = 2-3 years of spending. Sequence shield active.</li>
+            <li>Plan Roth conversion ladder for the gap years before SS &amp; RMDs.</li>
+            <li>Delay SS — the 8%/yr delay credit from 67 to 70 is risk-free 8%.</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <h3>Early retirement (65-75)</h3>
+          <ul>
+            <li>Spending curve: Smile if your taste is "experiences early, calm later."</li>
+            <li>Withdraw taxable first (step-up planning), then traditional, then Roth last.</li>
+            <li>Continue Roth conversions until RMD start.</li>
+          </ul>
+        </div>
+        <div class="stage">
+          <h3>Late retirement (75+)</h3>
+          <ul>
+            <li>QCDs from IRA satisfy RMDs without ordinary income.</li>
+            <li>Don't sell appreciated taxable — heirs get the step-up.</li>
+            <li>Real-asset cash flow is your inflation-protected income floor.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="personas">
+        <h2>14. Sample lifetimes to try</h2>
+        <div class="table-wrap">
+          <table class="personas">
+            <thead><tr><th>Persona</th><th>Setup</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Recent grad</strong></td><td>age 22, wages $55k, spending $30k, single, AL</td></tr>
+              <tr><td><strong>Mid-career engineer</strong></td><td>age 38, wages $130k, spending $70k, MFJ, AL</td></tr>
+              <tr><td><strong>Pre-retiree</strong></td><td>age 55, wages $180k, spending $90k, MFJ, AL, real-estate + stocks competence</td></tr>
+              <tr><td><strong>House hacker</strong></td><td>age 26, wages $70k, spending $35k; buy primary at 26 and sell at 28 every 2 yrs</td></tr>
+              <tr><td><strong>Joseph in plenty</strong></td><td>autopilot, Joseph 20% + Cycle Rhythm — watch reserve deployments in 1973-74, 2000-02, 2008-09 if your start crosses them</td></tr>
+              <tr><td><strong>Buffett-style operator</strong></td><td>autopilot, age 22, buy business at 32, never sell</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">Reproduce a life exactly by reusing the same random seed.</p>
+      </section>
+
+      <section id="limits">
+        <h2>15. Limitations (honest about these)</h2>
+        <ul class="bullets dense">
+          <li>One household, one earner.</li>
+          <li>Only AL state-tax modeled in detail; CA / TX / FL are placeholders.</li>
+          <li>Property values use a national index; no local market.</li>
+          <li>Health is a single probabilistic shock; no Long-Term Care modeling.</li>
+          <li>Business modeled as one shock-prone equity stake; no acquisition / exit dynamics.</li>
+          <li>Federal brackets are 2026 estimates and don't re-baseline across decades.</li>
+          <li>Mortgage rates are entered manually; no dynamic rate environment.</li>
+          <li>Inheritance is a probabilistic event; no estate-transfer modeling of <em>your</em> assets.</li>
+        </ul>
+        <p>The simulation is <em>illustrative</em>. Past patterns don't predict future results. Talk to a fiduciary and CPA before acting on any insight.</p>
+      </section>
+
+      <section id="files">
+        <h2>16. Files in this project</h2>
+        <pre><code>index.html                 — entry point; open in a browser
+manual.html                — this manual (styled)
+MANUAL.md                  — markdown source
+styles/main.css            — dark-theme UI
+styles/manual.css          — manual-specific styling
+data/historical.js         — S&amp;P / Treasuries / T-bill / CPI / housing / farmland / gold 1928-2024
+js/tax.js                  — federal + AL tax engine
+js/engine.js               — core simulation
+js/patterns.js             — pattern catalog + scoring
+js/events.js               — life events
+js/hints.js                — tooltip dictionary
+js/achievements.js         — achievements + Stewardship Score
+js/ui.js                   — screens and chart
+js/main.js                 — bootstrap
+test/headless.js           — Node sanity tests
+test/strategies.js         — pattern vs anti-pattern comparison
+test/uiverify.js           — Playwright UI driver</code></pre>
+        <p>Re-validate after changes: <code>node test/headless.js</code> for engine, <code>node test/uiverify.js</code> for the UI.</p>
+      </section>
+
+      <footer class="manual-footer">
+        <p><em>Wealth Seasons is a documentation of observed lessons translated into a playable system. Use it to internalize the couplings. Argue with the engine — it's where your intuition gets sharpened.</em></p>
+        <p><a class="back-to-game" href="index.html">◀ Back to game</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

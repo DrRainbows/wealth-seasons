@@ -1,0 +1,392 @@
+/* Manual styling. Extends main.css. */
+
+.manual-body {
+  background: linear-gradient(180deg, #0c0e13 0%, #11131b 50%, #0c0e13 100%);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  line-height: 1.65;
+}
+
+/* Header */
+.manual-header {
+  background: rgba(15,17,21,.92);
+  border-bottom: 1px solid var(--border);
+  padding: 22px 0;
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(8px);
+}
+.manual-header-inner {
+  max-width: 1180px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+}
+.manual-header h1 {
+  margin: 0; font-size: 26px; letter-spacing: .5px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.manual-header .tagline { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+.back-to-game {
+  color: var(--accent); text-decoration: none;
+  border: 1px solid rgba(93,210,138,.4); padding: 8px 14px; border-radius: 6px;
+  font-size: 13px;
+  transition: background .15s ease;
+  white-space: nowrap;
+}
+.back-to-game:hover { background: rgba(93,210,138,.10); }
+
+/* Layout: TOC + content */
+.manual-layout {
+  max-width: 1180px; margin: 0 auto; padding: 28px 24px 80px;
+  display: grid; grid-template-columns: 220px 1fr; gap: 36px;
+}
+
+/* TOC */
+.toc {
+  position: sticky; top: 110px; align-self: start;
+  max-height: calc(100vh - 130px); overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  font-size: 13px;
+}
+.toc h3 {
+  margin: 0 0 12px; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--muted); font-weight: 600;
+}
+.toc ol {
+  list-style: none; padding: 0; margin: 0;
+  counter-reset: section;
+}
+.toc ol li {
+  counter-increment: section;
+  padding: 4px 0;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  transition: border-color .15s ease, color .15s ease;
+}
+.toc ol li::before {
+  content: counter(section) ". ";
+  color: var(--muted);
+  margin-right: 4px;
+}
+.toc ol li a {
+  color: var(--text); text-decoration: none;
+}
+.toc ol li:hover { border-left-color: var(--accent); }
+.toc ol li:hover a { color: var(--accent); }
+
+/* Main content */
+.manual-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 48px;
+  font-size: 15px;
+  box-shadow: var(--shadow);
+  min-width: 0;
+}
+
+.manual-content section { margin-bottom: 48px; scroll-margin-top: 110px; }
+.manual-content section:last-child { margin-bottom: 0; }
+
+.manual-content h2 {
+  font-size: 22px;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.manual-content h3 {
+  font-size: 17px;
+  margin: 24px 0 12px;
+  color: var(--accent2);
+}
+.manual-content h4 {
+  font-size: 14px; margin: 12px 0 6px;
+  color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+}
+.manual-content p { margin: 0 0 14px; }
+.manual-content ol, .manual-content ul { padding-left: 22px; margin: 0 0 14px; }
+.manual-content li { margin: 6px 0; }
+.manual-content strong { color: #f0f3f8; }
+.manual-content em { color: #b4bccd; }
+
+/* Inline code */
+.manual-content code {
+  background: var(--bg-sub);
+  padding: 2px 6px; border-radius: 4px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  color: #c5e0ff;
+}
+.manual-content pre {
+  background: #0d1018;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent2);
+  padding: 14px 18px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.manual-content pre code {
+  background: transparent; padding: 0; color: #e0e7f3;
+}
+
+/* Big blockquote at top */
+.big-quote {
+  background: linear-gradient(135deg, rgba(93,210,138,.12), rgba(102,163,255,.08));
+  border-left: 4px solid var(--accent);
+  padding: 18px 22px;
+  margin: 0 0 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-style: italic;
+  color: #d4dde9;
+}
+
+/* Callout block */
+.callout {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent2);
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin: 0 0 32px;
+}
+.callout.cta { border-left-color: var(--accent); background: rgba(93,210,138,.05); }
+.callout h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+  font-size: 19px;
+}
+
+/* Bullets */
+ul.bullets { list-style: none; padding-left: 0; }
+ul.bullets li {
+  padding-left: 22px; position: relative;
+  margin-bottom: 10px;
+}
+ul.bullets li::before {
+  content: "▸";
+  position: absolute; left: 0; top: 0;
+  color: var(--accent);
+}
+ul.bullets.dense li { margin-bottom: 4px; }
+ul.bullets.coupling-list li::before { content: "⇄"; color: var(--accent2); }
+
+/* Phased ordered list */
+ol.phased {
+  counter-reset: step;
+  padding-left: 0;
+  list-style: none;
+}
+ol.phased > li {
+  counter-increment: step;
+  padding: 8px 0 8px 50px;
+  position: relative;
+  border-bottom: 1px dashed rgba(255,255,255,.04);
+}
+ol.phased > li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 8px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  color: var(--accent2);
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+ol.phased > li:last-child { border-bottom: none; }
+
+/* Scenario cards on setup section */
+.scenario-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+.scenario-card {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent2);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.scenario-card strong { display: block; margin-bottom: 4px; color: var(--accent2); }
+.scenario-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border-radius: 8px; }
+.manual-content table {
+  width: 100%; border-collapse: collapse;
+  background: var(--bg-sub);
+  font-size: 13px;
+  border-radius: 8px; overflow: hidden;
+}
+.manual-content table th {
+  text-align: left;
+  background: rgba(102,163,255,.10);
+  color: var(--accent2);
+  font-weight: 600;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.manual-content table td {
+  padding: 9px 12px;
+  border-bottom: 1px dashed rgba(255,255,255,.04);
+  vertical-align: top;
+}
+.manual-content table tr:last-child td { border-bottom: none; }
+.accounts .r-roth td:first-child { color: #b6e8c4; }
+.accounts .r-trad td:first-child { color: #e6cc99; }
+.accounts .r-hsa td:first-child  { color: #c2d99c; }
+.accounts .r-taxable td:first-child { color: #cfd8e6; }
+.accounts .r-cash td:first-child { color: #7fb4ff; }
+.accounts .r-reserve td:first-child { color: #f0b042; }
+.accounts .r-rental td:first-child { color: #c084fc; }
+.accounts .r-home td:first-child { color: #5dd28a; }
+.accounts .r-secondary td:first-child { color: #ce99e6; }
+.accounts .r-metals td:first-child { color: #f0d99c; }
+
+/* Pattern cards */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+.pattern-card {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent2);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.pattern-card strong {
+  display: block; font-size: 13px; margin-bottom: 4px; color: var(--text);
+}
+.pattern-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.pattern-card.layer-foundational { border-left-color: var(--accent); }
+.pattern-card.layer-asset        { border-left-color: var(--accent2); }
+.pattern-card.layer-tax          { border-left-color: var(--warn); }
+.pattern-card.layer-retirement   { border-left-color: #c084fc; }
+.pattern-card.layer-legacy       { border-left-color: #f472b6; }
+.pattern-card.meta {
+  background: linear-gradient(135deg, rgba(93,210,138,.10), rgba(102,163,255,.05));
+}
+
+/* Achievement categories */
+.ach-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 14px 0;
+}
+.ach-cat {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.ach-cat h4 {
+  margin: 0 0 8px;
+  color: var(--accent);
+}
+.ach-cat ul { list-style: none; padding-left: 0; margin: 0; }
+.ach-cat li {
+  font-size: 12px; color: var(--text);
+  padding: 3px 0;
+  display: flex; align-items: center;
+}
+.ach-cat li::before {
+  content: "🏆";
+  margin-right: 6px;
+  opacity: 0.6;
+  font-size: 11px;
+}
+
+/* Definition list */
+dl.metrics-list { margin: 0 0 18px; }
+dl.metrics-list dt {
+  color: var(--accent2);
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 14px;
+}
+dl.metrics-list dd {
+  margin: 4px 0 0; padding-left: 0;
+  color: #c9d2e0;
+  font-size: 13px;
+}
+
+/* Archetype cards */
+.archetypes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+.archetype {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+.archetype strong { display: block; color: var(--accent); margin-bottom: 4px; }
+.archetype p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+
+/* Life stages */
+.stage {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 12px 0;
+}
+.stage h3 {
+  margin-top: 0; color: var(--accent);
+}
+
+/* Keyboard key */
+kbd {
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* Footer */
+.manual-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+.manual-footer p { margin: 8px 0; }
+
+/* Mobile */
+@media (max-width: 880px) {
+  .manual-layout { grid-template-columns: 1fr; }
+  .toc {
+    position: static;
+    max-height: none;
+    margin-bottom: 16px;
+  }
+  .manual-content { padding: 24px 22px; }
+}
